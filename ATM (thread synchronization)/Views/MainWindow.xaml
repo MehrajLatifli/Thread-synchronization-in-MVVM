@@ -1,0 +1,84 @@
+﻿<Window x:Class="ATM__thread_synchronization_.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ATM__thread_synchronization_" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        mc:Ignorable="d"
+        Title="ATM (Example for thread synchronization)" Height="450" Width="800" Background="Wheat" BorderBrush="AliceBlue" Icon="atm logo.png">
+    <DockPanel>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Button x:Name="InsertCardButton" Margin="10" Padding="2" Content="Insert Card" FontSize="40" FontWeight="Bold"  Background="CadetBlue" Foreground="Purple" Command="{Binding InsertCartCommand}"></Button>
+
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <TextBox x:Name="CardNumberTbox" BorderBrush="Gray" Margin="10" Padding="2" FontSize="50" FontWeight="Black" Foreground="Purple" MaxLength="14" MaxLines="14" IsEnabled="False">
+
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="TextChanged">
+                            <i:InvokeCommandAction Command="{Binding OnlyNumberCommand1}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    
+                </TextBox>
+            </Grid>
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="LoadDataButton" Grid.Column="0" Margin="5" Content="Load data" FontSize="50" FontWeight="Black"  Background="CadetBlue" Foreground="Purple" Command="{Binding LoadDataCommand}"></Button>
+
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock x:Name="UserNameTblock" Grid.Row="0" FontSize="30" Margin="5" Padding="2" Foreground="Purple" Text="{Binding Card.UserName}"></TextBlock>
+                    <TextBlock x:Name="BalanceTblock" Grid.Row="1" FontSize="30" Margin="5" Padding="2" Foreground="Purple" Text="{Binding Card.Balance}"></TextBlock>
+
+                </Grid >
+
+
+            </Grid>
+
+            <Grid Grid.Row="3">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <TextBox x:Name="TransferMoneyTbox" Grid.Column="0" Margin="5" Padding="5,20,15,5" MaxLines="4" MaxLength="4" MinLines="4" FontSize="40" FontWeight="Black" Foreground="Purple">
+                    
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="TextChanged">
+                            <i:InvokeCommandAction Command="{Binding OnlyNumberCommand2}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    
+                </TextBox>
+                <Button x:Name="TransferMoneyButton" Grid.Column="1" Margin="5" Padding="2" FontSize="40" FontWeight="Black" Content="Transfer Money"  Background="CadetBlue" Foreground="Purple" Command="{Binding TransferMoneyCommand}"></Button>
+                <TextBlock x:Name="DecliningBalanceTblock" Grid.Column="2" FontSize="40" FontWeight="Black" Margin="5" Padding="5,20,15,5" Foreground="Purple" Text="{Binding Card.DecliningBalance}"></TextBlock>
+
+            </Grid>
+
+        </Grid>
+
+    </DockPanel>
+</Window>
+
