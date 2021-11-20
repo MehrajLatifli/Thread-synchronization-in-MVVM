@@ -1,2 +1,2 @@
-# thread synchronization in MVVM
+# Thread synchronization in MVVM
 Example of thread synchronization
